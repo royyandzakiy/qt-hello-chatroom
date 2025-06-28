@@ -1,0 +1,113 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Remove Build Directory",
+            "type": "shell",
+            "command": "cmd /c \"if exist build (rmdir /s /q build)\"",
+            "problemMatcher": [],
+            "group": "build",
+            "detail": "Removes the entire build directory for a completely clean state."
+        },
+
+        // TASKS -----------------------
+
+        {
+            "label": "Configure",
+            "type": "shell",
+            "command": "cmd /c \"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\" && cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -A x64 -DCMAKE_TOOLCHAIN_FILE=\"C:/vcpkg/scripts/buildsystems/vcpkg.cmake\"\"",
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "cmd /c \"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\" && cmake --build build --target clean\"",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "cmd /c \"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\" && cmake --build build --config Debug\"",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": ".\\build\\Debug\\QtChatroom.exe",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "group": "test"
+        },
+
+        // DOCUMENTATION TASKS -----------------------
+
+        {
+            "label": "Generate Developer Docs",
+            "type": "shell",
+            "command": "cmd /c \"if exist docs\\developer_docs (rmdir /s /q docs\\developer_docs) && \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\" && cmake --build build --target developer_docs && cd docs\\developer_docs && if exist html ( ren html docs && copy ..\\documentation.html .\\ )\"",
+            "problemMatcher": [],
+            "detail": "Cleans, generates, and structures API documentation for developers."
+        },
+        {
+            "label": "Generate Client Docs",
+            "type": "shell",
+            "command": "cmd /c \"if exist docs\\client_docs (rmdir /s /q docs\\client_docs) && \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\" && cmake --build build --target client_docs && cd docs\\client_docs && if exist html ( ren html docs && copy ..\\documentation.html .\\ )\"",
+            "problemMatcher": [],
+            "detail": "Cleans, generates, and structures client-facing documentation."
+        },
+
+        // COMBINATIONS -----------------------
+
+        {
+            "label": "Clean -> Build",
+            "dependsOn": ["Clean", "Build"],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "Full Clean -> Configure -> Build",
+            "dependsOn": ["Remove Build Directory", "Clean", "Build"],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "Build -> Run",
+            "dependsOn": [
+                "Build",
+                "Run"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean -> Build -> Run",
+            "dependsOn": [
+                "Clean",
+                "Build",
+                "Run"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "Full Clean -> Configure -> Build -> Run",
+            "dependsOn": [
+                "Remove Build Directory",
+                "Configure",
+                "Build",
+                "Run"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        }
+    ]
+}

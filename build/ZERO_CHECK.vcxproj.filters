@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\royya\royyan\project-coding\cpp\202506\qt-hello-chatroom\build\CMakeFiles\5f64f29e42ac03d94a7bbd75abb16d00\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{5253E968-090E-3C26-A827-6A26B40BA25B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
