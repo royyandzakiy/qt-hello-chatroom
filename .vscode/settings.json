@@ -1,4 +1,6 @@
 {
+    "cmake.useCMakePresets": "always",
+	"cmake.options.statusBarVisibility": "visible",
     "files.associations": {
         "algorithm": "cpp",
         "array": "cpp",
