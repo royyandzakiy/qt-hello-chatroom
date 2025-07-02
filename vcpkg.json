@@ -1,6 +1,7 @@
 {
   "name": "qt-chatroom",
   "version-string": "0.1.0",
+  "builtin-baseline": "9589967d228300217d24d493e690ead3585bbe46",
   "dependencies": [
     "qt5-base",
     "qt5-tools"
